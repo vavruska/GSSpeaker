@@ -9,7 +9,7 @@
   <Identity
     Name="61270RTSSoftware.GSSpeaker"
     Publisher="CN=082CC722-BD98-45C5-9ED1-6D3A1E5B5D7E"
-    Version="0.1.0.0" />
+    Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="423c48ed-e971-4db6-8b54-b5571b067b2d" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

@@ -57,10 +57,6 @@ namespace GSSpeaker
             statusText.Document.SetText(Windows.UI.Text.TextSetOptions.None, "SpeakerGS V1.0");
             statusText.Document.GetText(Windows.UI.Text.TextGetOptions.None, out string prevText);
             statusText.Document.SetText(Windows.UI.Text.TextSetOptions.None, prevText + "===========");
-            statusText.Document.Selection.SetRange(0, statusText.Document.Selection.EndPosition);
-            Windows.UI.Text.ITextSelection selectedText = statusText.Document.Selection;
-            statusText.Document.Selection.CharacterFormat.Bold = Windows.UI.Text.FormatEffect.On;
-            statusText.IsReadOnly = true;
 			dictatedTextBuilder = new StringBuilder();
 			try
 			{
@@ -128,8 +124,6 @@ namespace GSSpeaker
 		protected async override void OnNavigatedTo(NavigationEventArgs e)
 		{
 			permissionGained = await AudioCapturePermissions.RequestMicrophonePermission();
-			//await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-settings:privacy-speech"));
-			//permissionGained = await AudioCapturePermissions.RequestMicrophonePermission();
 
 			if (permissionGained)
 			{
@@ -724,13 +718,13 @@ namespace GSSpeaker
 					{
 						await speechRecognizer.ContinuousRecognitionSession.StopAsync();
 
+#if DEBUG
 						// Ensure we don't leave any hypothesis text behind
 						if (dictatedTextBuilder.ToString().Length > 0)
                         {
-#if DEBUG
 							appendStatusText(dictatedTextBuilder.ToString());
+					}
 #endif
-						}
 					}
 					catch (Exception exception)
 					{
